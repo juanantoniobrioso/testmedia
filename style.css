@@ -1,0 +1,61 @@
+.video-container {
+    position: relative;
+    width: 80%;
+    margin: 20px auto;
+}
+
+#miVideo {
+    width: 100%;
+    display: block;
+}
+
+.controles-personalizados {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#playPauseBtn {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Estilo para el botón de pausa (cambiará con JS) */
+#playPauseBtn.pausado {
+    color: yellow; 
+}
+
+.barra-fondo {
+    width: 100%; 
+    height: 10px;
+    background-color: #ddd; /* Gris claro */
+    cursor: pointer; /* Manita para indicar que es clicable */
+    margin-top: 10px;
+}
+
+.barra-relleno {
+    width: 0%; /* Empieza en 0 */
+    height: 100%;
+    background-color: #f00; 
+    pointer-events: none; 
+}
+
+#tiempoTexto {
+    font-family: monospace; /* Hace que los números tengan el mismo ancho */
+    font-size: 14px;
+    margin-left: 10px;
+    color: #FFFFFF;
+}
+
+.controles {
+    display: flex;
+    align-items: center; /* Alinea botón y texto verticalmente */
+    margin-bottom: 5px;
+}
