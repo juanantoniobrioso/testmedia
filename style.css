@@ -59,3 +59,17 @@
     align-items: center; /* Alinea botón y texto verticalmente */
     margin-bottom: 5px;
 }
+
+#volumenSlider {
+    width: 80px; /* Hacemos la barra cortita */
+    cursor: pointer;
+    margin-left: 10px; /* Separación del texto de tiempo */
+    vertical-align: middle; /* Alineación con el texto */
+}
+
+.icono-volumen {
+    cursor: pointer; /* Manita al pasar el mouse */
+    margin-left: 10px;
+    font-size: 20px; /* Un poco más grande */
+    user-select: none; /* Evita que se seleccione el texto al hacer doble clic */
+}

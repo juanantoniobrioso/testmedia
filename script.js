@@ -3,6 +3,9 @@ const playPauseBtn = document.getElementById('playPauseBtn');
 const barraProgreso = document.getElementById('barraProgreso');
 const barraContenedor = document.getElementById('barraContenedor');
 const tiempoTexto = document.getElementById('tiempoTexto'); // Nuevo elemento
+const volumenSlider = document.getElementById('volumenSlider');
+const btnMute = document.getElementById('btnMute');
+
 
 // --- FUNCIÓN HELPER: Convierte segundos a formato MM:SS ---
 function formatearTiempo(segundos) {
@@ -60,3 +63,30 @@ barraContenedor.addEventListener('click', (e) => {
 video.addEventListener('loadedmetadata', () => {
     tiempoTexto.textContent = `00:00 / ${formatearTiempo(video.duration)}`;
 });
+
+volumenSlider.addEventListener('input', (e) => {
+    // e.target.value es el valor del input (entre 0 y 1)
+    video.volume = e.target.value;
+    if (valor == 0) {
+        btnMute.textContent = '🔇';
+    } else {
+        btnMute.textContent = '🔊';
+        // Si el usuario mueve la barra, actualizamos la "memoria"
+        ultimoVolumen = valor; 
+    }
+});
+
+let ultimoVolumen = 0.5;
+
+btnMute.addEventListener('click', () => {
+    if(video.volume > 0){
+        ultimoVolumen = video.volume;
+        video.volume = 0;
+        volumenSlider.value = 0;
+        btnMute.textContent = '🔇';
+    }else{
+        video.volume = ultimoVolumen || 1;
+        volumenSlider.value = video.volume;
+        btnMute.textContent = '🔊';
+    }
+})
