@@ -1,15 +1,11 @@
-.video-container {
-    position: relative;
-    width: 80%;
-    margin: 20px auto;
-}
-
-#player-container {
+/* El contenedor principal */
+.player-container {
     position: relative; /* Necesario para que los controles se posicionen dentro */
     width: 600px; /* Tamaño normal */
     background: black;
 }
 
+/* IMPORTANTE: Cuando esté en pantalla completa */
 .player-container:fullscreen {
     width: 100%;
     height: 100%;
@@ -18,21 +14,40 @@
     align-items: center;
 }
 
-#miVideo {
-    width: 100%;
-    display: block;
-    object-fit: contain;
+#videoPlayer {
+    background-color: black; /* Si no pones esto, el fondo puede ser transparente */
+    width: 600px; /* Tamaño normal */
+    position: relative;
 }
 
-.controles-personalizados {
-    position: absolute;
-    bottom: 0;
+/* Regla mágica para centrar todo */
+#videoPlayer:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* El video debe ocupar todo el espacio disponible */
+#miVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* IMPORTANTE: Mantiene la proporción (no deforma la imagen) */
+}
+
+/* Tus controles deben flotar sobre el video */
+.controles {
+    position: absolute; /* Flota encima */
+    bottom: 0; /* Pegado abajo */
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.7); /* Fondo semitransparente para que se vean bien */
+    padding: 10px;
     box-sizing: border-box;
-    z-index: 2147483647;
+    z-index: 2147483647; /* Un número muy alto para asegurar que esté encima de todo */
+    
+    /* Opcional: transición suave para que aparezcan/desaparezcan */
     transition: opacity 0.3s;
 }
 

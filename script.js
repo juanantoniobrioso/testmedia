@@ -5,6 +5,7 @@ const barraContenedor = document.getElementById('barraContenedor');
 const tiempoTexto = document.getElementById('tiempoTexto'); // Nuevo elemento
 const volumenSlider = document.getElementById('volumenSlider');
 const btnMute = document.getElementById('btnMute');
+const videoPlayer = document.getElementById('videoPlayer');
 const btnFullScreen = document.getElementById('btnFullScreen');
 
 // --- FUNCIÓN HELPER: Convierte segundos a formato MM:SS ---
@@ -93,19 +94,63 @@ btnMute.addEventListener('click', () => {
 
 
 //Pantalla completa
+/*
 btnFullScreen.addEventListener('click', () => {
-    if(video.requestFullscreen){
-        video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) { // Firefox
-        video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) { // Chrome, Safari, Opera
-        video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) { // IE/Edge
-        video.msRequestFullscreen();
-    }
-})
-
-document.addEventListener('fullscreenchange', (event) => {
     if(!document.fullscreenElement){
+        if(video.requestFullscreen){
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) { // Firefox
+            video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { // IE/Edge
+            video.msRequestFullscreen();
+        }
+    } else {
+        if(document.exitFullscreen){
+            document.exitFullscreen();
+        } else if(document.webkitExitFullscreen) { // Safari
+            document.webkitExitFullscreen();
+        }
     }
+    
 })
+    */
+btnFullscreen.addEventListener('click', async () => {
+    // 1. Verificamos si el elemento existe
+    if (!videoPlayer) {
+        alert("ERROR: No encuentro el elemento con id 'videoPlayer' en el HTML");
+        return;
+    }
+
+    try {
+        // Detectamos si ya estamos en pantalla completa (soporte para varios navegadores)
+        const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+
+        if (!isFullscreen) {
+            // --- INTENTAR ENTRAR ---
+            if (videoPlayer.requestFullscreen) {
+                await videoPlayer.requestFullscreen();
+            } else if (videoPlayer.webkitRequestFullscreen) { /* Safari / Chrome antiguos */
+                await videoPlayer.webkitRequestFullscreen();
+            } else if (videoPlayer.msRequestFullscreen) { /* IE / Edge antiguos */
+                await videoPlayer.msRequestFullscreen();
+            } else {
+                alert("Tu navegador no soporta la API de Fullscreen estándar.");
+            }
+        } else {
+            // --- INTENTAR SALIR ---
+            if (document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                await document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                await document.msExitFullscreen();
+            }
+        }
+    } catch (error) {
+        // Esto nos dirá si el navegador bloqueó la acción
+        console.error(error);
+        alert("ERROR TÉCNICO: " + error.message);
+    }
+});
