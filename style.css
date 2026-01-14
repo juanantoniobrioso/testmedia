@@ -4,18 +4,36 @@
     margin: 20px auto;
 }
 
+#player-container {
+    position: relative; /* Necesario para que los controles se posicionen dentro */
+    width: 600px; /* Tamaño normal */
+    background: black;
+}
+
+.player-container:fullscreen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Centra el video si sobra espacio */
+    align-items: center;
+}
+
 #miVideo {
     width: 100%;
     display: block;
+    object-fit: contain;
 }
 
 .controles-personalizados {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background: rgba(0, 0, 0, 0.5);
     padding: 5px 10px;
-    border-radius: 5px;
+    box-sizing: border-box;
+    z-index: 2147483647;
+    transition: opacity 0.3s;
 }
 
 #playPauseBtn {

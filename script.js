@@ -5,7 +5,7 @@ const barraContenedor = document.getElementById('barraContenedor');
 const tiempoTexto = document.getElementById('tiempoTexto'); // Nuevo elemento
 const volumenSlider = document.getElementById('volumenSlider');
 const btnMute = document.getElementById('btnMute');
-
+const btnFullScreen = document.getElementById('btnFullScreen');
 
 // --- FUNCIÓN HELPER: Convierte segundos a formato MM:SS ---
 function formatearTiempo(segundos) {
@@ -88,5 +88,24 @@ btnMute.addEventListener('click', () => {
         video.volume = ultimoVolumen || 1;
         volumenSlider.value = video.volume;
         btnMute.textContent = '🔊';
+    }
+})
+
+
+//Pantalla completa
+btnFullScreen.addEventListener('click', () => {
+    if(video.requestFullscreen){
+        video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) { // Firefox
+        video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) { // IE/Edge
+        video.msRequestFullscreen();
+    }
+})
+
+document.addEventListener('fullscreenchange', (event) => {
+    if(!document.fullscreenElement){
     }
 })
