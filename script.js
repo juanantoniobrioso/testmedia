@@ -27,10 +27,10 @@ function formatearTiempo(segundos) {
 playPauseBtn.addEventListener('click', () => {
     if (video.paused) {
         video.play();
-        playPauseBtn.textContent = '⏸';
+        playPauseBtn.textContent = '||';
     } else {
         video.pause();
-        playPauseBtn.textContent = '▶';
+        playPauseBtn.textContent = '►';
     }
 });
 
